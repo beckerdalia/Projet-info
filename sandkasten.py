@@ -3,8 +3,8 @@ from __future__ import division
 
 
 data={}
-data['justine']=[19,12,13,14,15]
-data['hela']=[14,12,16,14,15]
+data['justine']=[19, 12,13,14,15]
+data['hela']=[14,12,16, 14,15]
 
 def write(data):
     with open('notes.txt','w') as file:
