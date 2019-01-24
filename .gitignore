@@ -1,0 +1,10 @@
+# Apple
+.DS_store
+
+# Python
+*.pyc
+
+# PyCharm
+*.bak
+*.idea
+
