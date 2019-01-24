@@ -36,7 +36,7 @@ def moyenne(data):
     return ms
 
 
-# quelques données pour tester
+# quelques donnees pour tester
 data={}
 data['justine']=[19, 12,13,14,15]
 data['hela']=[14,12,16, 14,15]
