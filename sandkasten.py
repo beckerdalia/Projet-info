@@ -23,6 +23,19 @@ def lecture(filename='notes.txt'):
              data[linestrip[0]] = [float(l) for l in linestrip[1:]]
 	return data
 
+#----------------------------------
+def moyenne(data):
+    ms = [0.0, 0.0, 0.0, 0.0, 0.0]
+    for nom in data:
+        notes = data[nom]
+        assert len(notes)==5
+        for i,note in enumerate(notes):
+            ms[i] += note
+    for i in range(5):
+        ms[i] /= len(data)
+    return ms
+
+
 # quelques données pour tester
 data={}
 data['justine']=[19, 12,13,14,15]
@@ -34,3 +47,4 @@ data2 = lecture()
 print("data", data)
 print("data2", data2)
 print("data == data 2 ? ", data == data2)
+print("moyenne", moyenne(data))
