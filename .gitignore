@@ -6,5 +6,5 @@
 
 # PyCharm
 *.bak
-*.idea
+.idea/*
 
