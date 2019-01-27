@@ -56,12 +56,14 @@ def diagramme_radar(title, notes, moyennes, matieres):
     ym = [moyennes[k]/20.0 * y[k] for k in range(6)]
 
     plt.figure(figsize=(6, 6))
-    plt.axis([-1.5, 1.5, -1.5, 1.5])
+    plt.axis([-1.25, 1.75, -1.5, 1.5])
     plt.title(title, fontweight='bold')
     for k in range(5):
         plt.plot([0, x[k]], [0, y[k]], '-k' )
         plt.plot(x[k], y[k], 'ok')
-        plt.annotate("{} ({:2d})".format(matieres[k],notes[k]),xy=(x[k]*1.1, y[k]*1.1))
+        va = 'bottom'
+        if y[k] < 0: va = 'top'
+        plt.annotate("{} ({:2d})".format(matieres[k],notes[k]),xy=(x[k]*1.1, y[k]*1.1), ha='center', va=va)
     plt.plot(xm, ym, '-b', label='Classe')
     plt.plot(xn, yn, '-r', label='Etudiant')
     plt.plot(xd, yd, '--k', label='10')
