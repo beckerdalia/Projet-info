@@ -39,6 +39,7 @@ def moyenne(data):
     return ms
 
 
+#----------------------------------
 def diagramme_radar(title, notes, moyennes, matieres):
     if len(notes) != 5: raise ValueError("notes n'est pas de taille 5")
     if len(moyennes) != 5: raise ValueError("moyennes n'est pas de taille 5")
