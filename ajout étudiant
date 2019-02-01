@@ -1,2 +1,15 @@
 
-def ajout_etudiant(
+def ajout_etudiant(dico_data,dico_matiere):
+  nom_etudiant=raw_input('Donnez le NOM et Prénom de l'élève à ajouter (exemple DUPONT Jean) : ')
+  if nom_etudiant.strip()[0]!=nom_etudiant.strip()[0].upper():
+      print 'Réessayez svp vous etes nul !'
+  notes=[]
+      nom_etudiant=raw_input('Donnez le NOM et Prénom de l'élève à ajouter (exemple DUPONT Jean) : ')
+  for matiere in dico_matiere.keys()
+      note_etudiant=raw.input('Donnez la note de {} de l'étudiant {} (s'il n'a pas de notes, rentrez un espace) : ').format(matiere,nom_etudiant)
+      notes.append(note_etudiant)
+  dico_data[nom_etudiant]=notes
+  
+  
+    
+   
