@@ -8,9 +8,11 @@ from moyennes import calcul_moyennes
 
 #----------------------------------
 def diagramme_radar(title, notes, moyennes, matieres):
-    if len(notes) != 5: raise ValueError("notes n'est pas de taille 5")
+    '''
+    if len(notes) != 5: raise ValueError("notes n'est pas de taille 5")   #mal placé car c'est nous qui rentrons les notes-> prend pas en compte les erreur de l'utilisateur
     if len(moyennes) != 5: raise ValueError("moyennes n'est pas de taille 5")
     if len(matieres) != 5: raise ValueError("matieres n'est pas de taille 5")
+    '''
     dpsc = 2 * math.pi / len(matieres)
     nbmatieres=len(matieres)+1
     notes.append(notes[0])
