@@ -11,17 +11,18 @@ def diagramme_radar(title, notes, moyennes, matieres):
     if len(notes) != 5: raise ValueError("notes n'est pas de taille 5")
     if len(moyennes) != 5: raise ValueError("moyennes n'est pas de taille 5")
     if len(matieres) != 5: raise ValueError("matieres n'est pas de taille 5")
-    dpsc = 2 * math.pi / 5.
+    dpsc = 2 * math.pi / len(matieres)
+    nbmatieres=len(matieres)+1
     notes.append(notes[0])
     moyennes.append(moyennes[0])
-    x = [math.cos(k * dpsc) for k in range(6)]
-    y = [math.sin(k * dpsc) for k in range(6)]
-    xd = [0.5 * x[k] for k in range(6)]
-    yd = [0.5 * y[k] for k in range(6)]
-    xn = [notes[k]/20.0 * x[k] for k in range(6)]
-    yn = [notes[k]/20.0 * y[k] for k in range(6)]
-    xm = [moyennes[k]/20.0 * x[k] for k in range(6)]
-    ym = [moyennes[k]/20.0 * y[k] for k in range(6)]
+    x = [math.cos(k * dpsc) for k in range(nbmatieres)]
+    y = [math.sin(k * dpsc) for k in range(nbmatieres)]
+    xd = [0.5 * x[k] for k in range(nbmatieres)]
+    yd = [0.5 * y[k] for k in range(nbmatieres)]
+    xn = [notes[k]/20.0 * x[k] for k in range(nbmatieres)]
+    yn = [notes[k]/20.0 * y[k] for k in range(nbmatieres)]
+    xm = [moyennes[k]/20.0 * x[k] for k in range(nbmatieres)]
+    ym = [moyennes[k]/20.0 * y[k] for k in range(nbmatieres)]
 
     plt.figure(figsize=(6, 6))
     plt.axis([-1.25, 1.75, -1.5, 1.5])
@@ -33,7 +34,7 @@ def diagramme_radar(title, notes, moyennes, matieres):
         if y[k] < 0: va = 'top'
         plt.annotate("{} ({:2d})".format(matieres[k],int(notes[k])),xy=(x[k]*1.1, y[k]*1.1), ha='center', va=va)
     plt.plot(xm, ym, '-b', label='Classe')
-    plt.plot(xn, yn, '-r', label='Etudiant')
+    plt.plot(xn, yn, '-r', linewidth=2.5, label='Etudiant')
     plt.plot(xd, yd, '--k', label='10')
     plt.legend(loc='upper left')
     plt.xticks([])
