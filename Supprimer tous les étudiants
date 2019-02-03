@@ -1,1 +1,7 @@
-
+def supp_tout(dico_data):
+    dico_data={}
+    return dico_data
+    
+    #sur les autres fonctions mettre 'if dico=vide, afficher 'pas de tableau à afficher', etc
+    
+    
