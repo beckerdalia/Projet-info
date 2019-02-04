@@ -1,7 +1,14 @@
 def supp_tout(dico_data):
-    dico_data={}
-    return dico_data
+    x=raw-imput("Voulez-vous vraiment supprimer tous les étudiants? Répondez par Oui ou Non")
+    while x.upper()!="OUI" or x.upper()!="NON":
+        print "Réessayez"
+        x=raw_imput("Voulez-vous vraiment supprimer tous les étudiants? Répondez par Oui ou Non")
+    if x.upper()="OUI"
+        dico.data={}
+        return dico.data
+    elif x.upper()="NON"
+        return None
     
-    #sur les autres fonctions mettre 'if dico=vide, afficher 'pas de tableau à afficher', etc
     
+ 
     
