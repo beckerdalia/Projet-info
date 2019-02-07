@@ -1,0 +1,12 @@
+def supprimer(dico_data):
+    print " la liste des élèves : "
+    for Nom in dico_data.keys():
+        print Nom+" ; ",
+    print "\n"
+    Nom=raw_input(" veuillez choisir un nom d'élève existant dans la liste ")
+    while (Nom in dico_data) == False :
+        print " veuillez vérifier que vous avez bien écrit le nom d'élève  "
+        Nom=raw_input(" veuillez choisir un nom d'élève existant dans la liste ")
+    del dico_data[Nom]
+    return dico_data
+        
