@@ -12,5 +12,7 @@ def sauvegarde_donnees(dico_data, dico_matiere):
                 if reponse.upper()=='OUI':
                     with open(nom_fichier,'w') as fichier:
                         writelines(dico_matiere+'\n'+dico_data)
-                        
+                else:
+                    return None
+                 
 
