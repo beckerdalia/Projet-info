@@ -1,7 +1,9 @@
 from ecriturelecture import lecture
 
 def affichage(matieres, data) :
+    # permet d'afficher le tableau avec les moyennes)
     eleves = sorted(data)
+    #tri des élèves dans l'ordre alphabétique
     maxname = len(max(eleves, key=len))+5
     maxmat = len(max(matieres, key=len))+5
     nmat = len(matieres)
