@@ -2,7 +2,15 @@
 def sauvegarde_donnees(dico_data, dico_matiere):
     nom_fichier=raw_imput('Choisissez le nom du fichier':)
     try:
-        open('nom_fichier.txt','a')
-        reponse=raw_imput('Le fichier existe, etes-vous sur de vouloir le remplacer? Repondez: Oui ou Non ':)
-    except :
-        print None
+        open('nom_fichier.txt','r')
+        X= True
+    except:
+        X= False
+        
+        if X=True:
+            reponse=raw_imput('Le fichier existe, etes-vous sur de vouloir le remplacer? Repondez: Oui ou Non ':)
+                if reponse.upper()=='OUI':
+                    with open(nom_fichier,'w') as fichier:
+                        writelines(dico_matiere+'\n'+dico_data)
+                        
+
