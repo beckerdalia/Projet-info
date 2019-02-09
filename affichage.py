@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from ecriturelecture import lecture
 
 def affichage(matieres, data) :

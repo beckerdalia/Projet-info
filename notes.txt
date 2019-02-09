@@ -1,3 +1,4 @@
 Chimie,Maths,Physique,Biologe,SHS
-justine,19,12,13,14,15
-hela,14,12,16,14,15
+TOTO toto,12,8,9,11,19
+ABADA justine,19.0,12.0,13.0,14.0,15.0
+ADABA hela,14.0,12.0,16.0,14.0,15.0

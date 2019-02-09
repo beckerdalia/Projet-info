@@ -1,8 +1,4 @@
 # -*- coding: utf-8 -*-
-from __future__ import print_function
-from __future__ import division
-import math
-import matplotlib.pyplot as plt
 
 #----------------------------------
 def ecriture(matieres, data, filename='notes.txt'):
@@ -69,10 +65,10 @@ if __name__ == '__main__':
     matieres2, data2 = lecture()
 
     if matieres == matieres2:
-        print("matieres ok")
+        print "matieres ok"
     else:
         raise IOError("matieres lu != matieres écrit")
     if data == data2:
-        print("data ok")
+        print "data ok"
     else:
         raise IOError("data lu != data écrit")
