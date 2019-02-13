@@ -1,7 +1,22 @@
 # -*- coding: utf-8 -*-
-from ecriturelecture import lecture
+import ecriturelecture
 
-def affichage(matieres, data) :
+def affichage_etudiant(nom, matieres, data):
+    maxmat = len(max(matieres, key=len))+5
+    nmat = len(matieres)
+    fmtname = "{:"+str(len(nom))+"s}"
+    fmtmat = "{:^"+str(maxmat)+"s}"
+
+    print fmtname.format(""),
+    for i in range(len(matieres)):
+        print fmtmat.format(matieres[i]),
+    print ""
+    print fmtname.format(nom),
+    for i in range(nmat):
+        print fmtmat.format(str(data[nom][i])),
+    print ""
+
+def affichage_promo(matieres, data) :
     # permet d'afficher le tableau avec les moyennes)
     eleves = sorted(data)
     #tri des élèves dans l'ordre alphabétique
@@ -9,7 +24,7 @@ def affichage(matieres, data) :
     maxmat = len(max(matieres, key=len))+5
     nmat = len(matieres)
 
-    fmtname = "{:>"+str(maxname)+"s}"
+    fmtname = "{:"+str(maxname)+"s}"
     fmtmat = "{:^"+str(maxmat)+"s}"
 
     print fmtname.format(""),
@@ -24,5 +39,5 @@ def affichage(matieres, data) :
 
 #================================================================#
 if __name__ == '__main__':
-    matieres, data = lecture('notes.txt')
-    affichage(matieres, data)
+    matieres, data = ecriturelecture.lecture('notes.txt')
+    affichage_promo(matieres, data)

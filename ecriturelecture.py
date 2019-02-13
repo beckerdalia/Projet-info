@@ -15,7 +15,7 @@ def ecriture(matieres, data, filename='notes.txt'):
     with open(filename,'w') as file:
         file.write(",".join(matieres))
         file.write("\n")
-        for nom in data:
+        for nom in sorted(data):
             file.write(nom)
             for note in data[nom]:
                 file.write(",{}".format(note))
@@ -55,15 +55,9 @@ def lecture2(fichier) :
 
 #================================================================#
 if __name__ == '__main__':
-    # quelques donnees pour tester
-    data={}
-    data['justine']=[19, 12,13,14,15]
-    data['hela']=[14,12,16, 14,15]
-    matieres=["Chimie","Maths","Physique","Biologe","SHS"]
-
+    matieres, data = lecture()
     ecriture(matieres, data)
     matieres2, data2 = lecture()
-
     if matieres == matieres2:
         print "matieres ok"
     else:

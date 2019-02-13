@@ -1,34 +1,42 @@
 # -*- coding: utf-8 -*-
-import ecriturelecture
+import ecriturelecture, outils_clavier
+
+def get_note(matiere, nom):
+    note_valide = False
+    while not note_valide:
+        note = raw_input("Donnez la note de : '{}' de l'étudiant : '{}': ".format(matiere, nom))
+        try:
+            note = float(note)
+            note_valide = note >= 0 and note <= 20
+        except:
+            pass
+        if note_valide:
+            return note
+
 
 def ajout_etudiant(dico_data, matieres):
-    nom_etudiant = raw_input("Donnez le NOM et Prénom de l'élève à ajouter (exemple DUPONT Jean) : ").strip()
-    nomsplit = nom_etudiant.split()
-    if len(nomsplit)!=2:
-        # il ne suffirait pas de relancer 'raw_input', car il n'y aurait plus de test
-        # si l'on veut faire ça, il faudrait faire une boucle....
-        raise IOError("Réessayez svp, il faut nom et prénom !")
-    if nomsplit[0]!=nomsplit[0].upper():
-        raise IOError("Réessayez svp, le nom de famille doit etre en majuscules !")
+    nom = outils_clavier.get_nom()
     notes=[]
     for matiere in matieres:
-        note_etudiant = raw_input("Donnez la note de : ' "+matiere+" ' de l'étudiant : " + nom_etudiant+": ")
-        if note_etudiant not in range(0,21):
-            raise IOError("la note doit être entre 0 et 20 !")
-        # ça marche pas si une matiere manque !
-        # note_etudiant = raw_input("Donnez la note de : ' "+matiere+" ' de l'étudiant : " + nom_etudiant+" (s'il n'a pas de notes, rentrez un '_') : ")
-        # if note_etudiant!='_':
-        #     notes.append(note_etudiant)
-    dico_data[nom_etudiant]=notes
+        note = get_note(matiere, nom)
+        notes.append(note)
+    dico_data[nom]=notes
     return dico_data
-  
+
+def saisie_etudiant(dico_data, matieres):
+    nom, numero = outils_clavier.affiche_et_choix(dico_data.keys())
+    matiere, numero = outils_clavier.affiche_et_choix(matieres)
+    note = get_note(matiere, nom)
+    dico_data[nom][numero-1]=note
+    return dico_data
+
 #================================================================#
 if __name__ == '__main__':
     matieres, data = ecriturelecture.lecture('notes.txt')
-    print "data", data
+    print "avant data", data
     data2 = ajout_etudiant(data, matieres)
     ecriturelecture.ecriture(matieres, data2)
-    print "data", data
+    print "après data", data
     pass
     
    
