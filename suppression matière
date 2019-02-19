@@ -1,0 +1,12 @@
+
+def suppression_matiere(dico_data, dico_matiere) :
+    matiere=raw_input("veuillez choisir une matière :  ")
+    while matiere in  dico_matiere == False :
+        print " vérifiez la cohérence de votre saisie , voici la liste des matières"
+        print dico_matiere.keys()
+        matiere=raw_input("veuillez choisir une matière :  ")
+    x=dico_matiere.keys().index(matiere)
+    del dico_matiere[matiere]
+    for nom  in dico_data :
+        dico_data[nom].pop(x)
+    return None
