@@ -8,10 +8,10 @@ def menu_principal():
     choix_possibles.append('Afficher les résultats d’un étudiant.')
     choix_possibles.append('Ajouter un étudiant.')
     choix_possibles.append('Saisie ou modification d’une note pour un étudiant.')
-    choix_possibles.append('Suppression d’un étudiant.')
+    choix_possibles.append("Suppression d'un étudiant.")
     choix_possibles.append('Suppression de tous les étudiants.')
     choix_possibles.append('Sauvegarder les données.')
-    choix_possibles.append('Quitter l’application.')
+    choix_possibles.append("Quitter l'application.")
 
     choix, numero = outils_clavier.affiche_et_choix(choix_possibles)
     return numero
