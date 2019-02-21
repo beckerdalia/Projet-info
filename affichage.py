@@ -9,7 +9,7 @@ def affichage_etudiant(nom, matieres, data):
 
     print fmtname.format(""),
     for i in range(len(matieres)):
-        print fmtmat.format(matieres[i]),
+        print fmtmat.format(matieres.keys()[i]),
     print ""
     print fmtname.format(nom),
     for i in range(nmat):
@@ -29,7 +29,7 @@ def affichage_promo(matieres, data) :
 
     print fmtname.format(""),
     for i in range(len(matieres)):
-        print fmtmat.format(matieres[i]),
+        print fmtmat.format(matieres.keys()[i]),
     print ""
     for nom in eleves:
         print fmtname.format(nom),
