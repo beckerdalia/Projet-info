@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import ecriturelecture
+import sauvegardelecture
 
 def affichage_etudiant(nom, matieres, data):
     maxmat = len(max(matieres, key=len))+5
@@ -39,5 +39,5 @@ def affichage_promo(matieres, data) :
 
 #================================================================#
 if __name__ == '__main__':
-    matieres, data = ecriturelecture.lecture('notes.txt')
+    matieres, data = sauvegardelecture.lecture('notes.txt')
     affichage_promo(matieres, data)

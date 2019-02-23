@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import math
 import matplotlib.pyplot as plt
-from ecriturelecture import lecture
+from sauvegardelecture import lecture
 from moyennes import calcul_moyennes
 
 #----------------------------------

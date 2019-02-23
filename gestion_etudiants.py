@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import ecriturelecture, outils_clavier
+import sauvegardelecture, outils_clavier
 
 def get_note(matiere, nom):
     note_valide = False
@@ -15,7 +15,7 @@ def get_note(matiere, nom):
 
 
 def ajout_etudiant(dico_data, matieres):
-    nom = outils_clavier.get_nom()
+    nom = outils_clavier.saisie_nom()
     notes=[]
     for matiere in matieres:
         note = get_note(matiere, nom)
@@ -32,10 +32,10 @@ def saisie_etudiant(dico_data, matieres):
 
 #================================================================#
 if __name__ == '__main__':
-    matieres, data = ecriturelecture.lecture('notes.txt')
+    matieres, data = sauvegardelecture.lecture('notes.txt')
     print "avant data", data
     data2 = ajout_etudiant(data, matieres)
-    ecriturelecture.ecriture(matieres, data2)
+    sauvegardelecture.sauvegarde(matieres, data2)
     print "après data", data
     pass
     

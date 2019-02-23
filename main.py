@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import affichage, ecriturelecture, gestion_etudiants, outils_clavier
+import affichage, sauvegardelecture, gestion_etudiants, outils_clavier, quitter
 
 def menu_principal():
     choix_possibles = []
@@ -23,7 +23,7 @@ if __name__ == '__main__':
     while not fini:
         choix = menu_principal()
         if choix == 1:
-            matieres, data = ecriturelecture.lecture('notes.txt')
+            matieres, coeffs, data = sauvegardelecture.lecture()
         elif choix == 2:
             affichage.affichage_promo(matieres, data)
         elif choix == 3:
@@ -39,6 +39,7 @@ if __name__ == '__main__':
         elif choix == 7:
             raise NotImplementedError("reste à faire")
         elif choix == 8:
-            ecriturelecture.ecriture(matieres, data, 'notes.txt')
-        else:
+            sauvegardelecture.sauvegarde(matieres, data, 'notes.txt')
+        elif choix == 9:
+            quitter.efface_ecran()
             fini = True
