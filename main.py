@@ -1,16 +1,19 @@
 # -*- coding: utf-8 -*-
-import affichage, sauvegardelecture, gestion_etudiants, outils_clavier, quitter
+import affichage, sauvegardelecture, gestion_etudiants, outils_clavier, quitter, radar, suppression
 
 def menu_principal():
     choix_possibles = []
-    choix_possibles.append('Charger en mémoire le fichier de notes.')
-    choix_possibles.append('Afficher la promotion.')
-    choix_possibles.append('Afficher les résultats d’un étudiant.')
-    choix_possibles.append('Ajouter un étudiant.')
-    choix_possibles.append('Saisie ou modification d’une note pour un étudiant.')
+    choix_possibles.append("Charger en mémoire le fichier de notes.")
+    choix_possibles.append("Afficher la promotion.")
+    choix_possibles.append("Afficher les résultats d’un étudiant.")
+    choix_possibles.append("Ajouter un étudiant.")
+    choix_possibles.append("Saisie ou modification d’une note pour un étudiant.")
     choix_possibles.append("Suppression d'un étudiant.")
-    choix_possibles.append('Suppression de tous les étudiants.')
-    choix_possibles.append('Sauvegarder les données.')
+    choix_possibles.append("Suppression de tous les étudiants.")
+    choix_possibles.append("Sauvegarder les données.")
+    choix_possibles.append("Saisie d'une matière.")
+    choix_possibles.append("Supression d'une matière.")
+    choix_possibles.append("Modification du coefficient d'une matière.")
     choix_possibles.append("Quitter l'application.")
 
     choix, numero = outils_clavier.affiche_et_choix(choix_possibles)
@@ -20,26 +23,36 @@ def menu_principal():
 #================================================================#
 if __name__ == '__main__':
     fini = False
+    matieres, coeffs, notes = sauvegardelecture.lecture('notes.txt')
     while not fini:
         choix = menu_principal()
         if choix == 1:
-            matieres, coeffs, data = sauvegardelecture.lecture()
+            matieres, coeffs, notes = sauvegardelecture.lecture()
         elif choix == 2:
-            affichage.affichage_promo(matieres, data)
+            affichage.affichage_promo(matieres, notes)
         elif choix == 3:
-            noms = data.keys()
+            noms = notes.keys()
             nom, numero = outils_clavier.affiche_et_choix(noms)
-            affichage.affichage_etudiant(nom, matieres, data)
+            affichage.affichage_etudiant(nom, matieres, notes)
+            radar.diagramme_radar(nom, matieres, notes)
         elif choix == 4:
-            gestion_etudiants.ajout_etudiant(data, matieres)
+            gestion_etudiants.ajout_etudiant(notes, matieres)
         elif choix == 5:
-            gestion_etudiants.saisie_etudiant(data, matieres)
+            gestion_etudiants.saisie_etudiant(notes, matieres)
         elif choix == 6:
-            raise NotImplementedError("reste à faire")
+            noms = notes.keys()
+            nom, numero = outils_clavier.affiche_et_choix(noms)
+            notes = suppression.supprimer_etudiant(nom, notes)
         elif choix == 7:
-            raise NotImplementedError("reste à faire")
+            notes = suppression.supprimer_tous(notes)
         elif choix == 8:
-            sauvegardelecture.sauvegarde(matieres, data, 'notes.txt')
+            sauvegardelecture.sauvegarde(matieres, coeffs, notes)
         elif choix == 9:
+            raise NotImplementedError("???")
+        elif choix == 10:
+            raise NotImplementedError("???")
+        elif choix == 11:
+            raise NotImplementedError("???")
+        elif choix == 12:
             quitter.efface_ecran()
             fini = True

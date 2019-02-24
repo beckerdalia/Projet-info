@@ -1,43 +1,62 @@
 # -*- coding: utf-8 -*-
-import sauvegardelecture
+import sauvegardelecture, moyennes
 
-def affichage_etudiant(nom, matieres, data):
-    maxmat = len(max(matieres, key=len))+5
-    nmat = len(matieres)
-    fmtname = "{:"+str(len(nom))+"s}"
-    fmtmat = "{:^"+str(maxmat)+"s}"
-
-    print fmtname.format(""),
-    for i in range(len(matieres)):
-        print fmtmat.format(matieres.keys()[i]),
-    print ""
-    print fmtname.format(nom),
-    for i in range(nmat):
-        print fmtmat.format(str(data[nom][i])),
-    print ""
-
-def affichage_promo(matieres, data) :
-    # permet d'afficher le tableau avec les moyennes)
-    eleves = sorted(data)
+def affichage_promo(matieres, notes) :
+    # permet d'afficher le tableau avec les moyennes
+    eleves = sorted(notes)
     #tri des élèves dans l'ordre alphabétique
-    maxname = len(max(eleves, key=len))+5
+    maxnom = len(max(eleves, key=len))+5
+    #max des longueurs de noms pour bien aligner l'affichage
+    maxmat = len(max(matieres, key=len))+5
+    #de même pour les longueurs des matières
+
+    formatnom = "{:"+str(maxnom)+"s}"
+    formatmat = "{:>"+str(maxmat)+"s}"
+    formatnote = "{:"+str(maxmat)+".2f}"
+    # string pour le format de l'affichage utilisé en-dessous
+
+    print formatnom.format(""),
+    # champ de nom vide pour l'affichage des matières
+    for i in range(len(matieres)):
+        print formatmat.format(matieres[i]),
+        # affichage des matières en ligne (avec la virgule) de même longueur
+    print ""
+    # saut à la ligne
+    for nom in eleves:
+        print formatnom.format(nom),
+        # affichage du nom
+        for i in range(len(matieres)):
+            print formatnote.format(notes[nom][i]),
+        # affichage da la note
+        print ""
+    moy = moyennes.calcul_moyennes(notes)
+    # affichage des moyennes
+    print maxnom*'-'
+    print formatnom.format('moyenne'),
+    for i in range(len(matieres)):
+        print formatnote.format(moy[i]),
+    print ""
+
+
+def affichage_etudiant(nom, matieres, notes):
+    """
+    même chose pour un étudiant
+    """
     maxmat = len(max(matieres, key=len))+5
     nmat = len(matieres)
-
-    fmtname = "{:"+str(maxname)+"s}"
+    fmtnom = "{:"+str(len(nom))+"s}"
     fmtmat = "{:^"+str(maxmat)+"s}"
 
-    print fmtname.format(""),
+    print fmtnom.format(""),
     for i in range(len(matieres)):
-        print fmtmat.format(matieres.keys()[i]),
+        print fmtmat.format(matieres[i]),
     print ""
-    for nom in eleves:
-        print fmtname.format(nom),
-        for i in range(nmat):
-            print fmtmat.format(str(data[nom][i])),
-        print ""
+    print fmtnom.format(nom),
+    for i in range(nmat):
+        print fmtmat.format(str(notes[nom][i])),
+    print ""
 
 #================================================================#
 if __name__ == '__main__':
-    matieres, data = sauvegardelecture.lecture('notes.txt')
-    affichage_promo(matieres, data)
+    (matieres, coeffs, notes) = sauvegardelecture.lecture('notes.txt')
+    affichage_promo(matieres, notes)

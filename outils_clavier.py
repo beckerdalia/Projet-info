@@ -35,13 +35,13 @@ def affiche_et_choix(choix_possibles):
             print "\t({:1d}) {}".format(i+1,choix)
             # formatage 1d: entier de 1 caractère (on commence par 1 au lieu de 0)
         elif n<100:
-            print "\t({:2d}) {}".format(i + 1, choix)
+            print "\t({:02d}) {}".format(i + 1, choix)
             # si plus de 9 choix
         else:
             raise NotImplementedError("trop de choix ({})".format(n))
     choix_valide=False
     while not choix_valide:
-        choix = raw_input("Donner le votre choix (un chiffre) et valider avec entrée :").strip()
+        choix = raw_input("Donner votre choix (un chiffre) et valider avec entrée :").strip()
         try:
             choix = int(choix)
             choix_valide = choix in range(1,1+n)

@@ -47,8 +47,9 @@ def lecture(nom_fichier=""):
     retour: liste des matières, liste des coefficients et dictionaire des notes
     """
     if nom_fichier == "":
+        nom_fichier = raw_input("Choisissez le nom du fichier a lire : ").strip()
         while not os.path.isfile(nom_fichier):
-            nom_fichier=raw_input("Choisissez le nom du fichier a lire : ").strip()
+            nom_fichier=raw_input("Fichier non-existant: Réessayez : ").strip()
     notes = {}
     # dictionnaire vide
     with open(nom_fichier,'r') as file:

@@ -14,29 +14,30 @@ def get_note(matiere, nom):
             return note
 
 
-def ajout_etudiant(dico_data, matieres):
+def ajout_etudiant(notes, matieres):
     nom = outils_clavier.saisie_nom()
-    notes=[]
+    while nom in notes:
+        print("Étudiant déjà existant")
+        nom = outils_clavier.saisie_nom()
+    noteseleve=[]
     for matiere in matieres:
         note = get_note(matiere, nom)
-        notes.append(note)
-    dico_data[nom]=notes
-    return dico_data
+        noteseleve.append(note)
+    notes[nom]=noteseleve
+    return notes
 
-def saisie_etudiant(dico_data, matieres):
-    nom, numero = outils_clavier.affiche_et_choix(dico_data.keys())
+def saisie_etudiant(notes, matieres):
+    nom, numero = outils_clavier.affiche_et_choix(notes.keys())
     matiere, numero = outils_clavier.affiche_et_choix(matieres)
     note = get_note(matiere, nom)
-    dico_data[nom][numero-1]=note
-    return dico_data
+    notes[nom][numero-1]=note
+    return notes
 
 #================================================================#
 if __name__ == '__main__':
-    matieres, data = sauvegardelecture.lecture('notes.txt')
-    print "avant data", data
-    data2 = ajout_etudiant(data, matieres)
-    sauvegardelecture.sauvegarde(matieres, data2)
-    print "après data", data
-    pass
-    
+    (matieres, coeffs, notes) = sauvegardelecture.lecture('notes.txt')
+    print "avant notes", notes
+    notes = ajout_etudiant(notes, matieres)
+    print "après notes", notes
+
    
