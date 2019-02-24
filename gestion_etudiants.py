@@ -1,15 +1,18 @@
 # -*- coding: utf-8 -*-
 import sauvegardelecture, outils_clavier
 
-def get_note(matiere, nom):
+def saisie_note(matiere, nom):
     note_valide = False
     while not note_valide:
         note = raw_input("Donnez la note de : '{}' de l'étudiant : '{}': ".format(matiere, nom))
         try:
             note = float(note)
-            note_valide = note >= 0 and note <= 20
+            if note >= 0 and note <= 20:
+               note_valide = True
+            else:
+                print "mauvaise note '{}'".format(note)
         except:
-            pass
+            print "mauvaise saisie '{}'".format(note)
         if note_valide:
             return note
 
@@ -21,7 +24,7 @@ def ajout_etudiant(notes, matieres):
         nom = outils_clavier.saisie_nom()
     noteseleve=[]
     for matiere in matieres:
-        note = get_note(matiere, nom)
+        note = saisie_note(matiere, nom)
         noteseleve.append(note)
     notes[nom]=noteseleve
     return notes
@@ -29,7 +32,7 @@ def ajout_etudiant(notes, matieres):
 def saisie_etudiant(notes, matieres):
     nom, numero = outils_clavier.affiche_et_choix(notes.keys())
     matiere, numero = outils_clavier.affiche_et_choix(matieres)
-    note = get_note(matiere, nom)
+    note = saisie_note(matiere, nom)
     notes[nom][numero-1]=note
     return notes
 

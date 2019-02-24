@@ -1,14 +1,16 @@
 # -*- coding: utf-8 -*-
 import sauvegardelecture, moyennes
 
-def affichage_promo(matieres, notes) :
+def affichage_promo(matieres, coeffs, notes) :
     # permet d'afficher le tableau avec les moyennes
     eleves = sorted(notes)
     #tri des élèves dans l'ordre alphabétique
     maxnom = len(max(eleves, key=len))+5
     #max des longueurs de noms pour bien aligner l'affichage
-    maxmat = len(max(matieres, key=len))+5
+    maxmat = len(max(max(matieres, key=len),'moyenne'))+5
     #de même pour les longueurs des matières
+
+    moyennes_eleves = moyennes.calcul_moyennes_eleves(coeffs, notes)
 
     formatnom = "{:"+str(maxnom)+"s}"
     formatmat = "{:>"+str(maxmat)+"s}"
@@ -20,7 +22,7 @@ def affichage_promo(matieres, notes) :
     for i in range(len(matieres)):
         print formatmat.format(matieres[i]),
         # affichage des matières en ligne (avec la virgule) de même longueur
-    print ""
+    print formatmat.format("Moyenne")
     # saut à la ligne
     for nom in eleves:
         print formatnom.format(nom),
@@ -28,14 +30,15 @@ def affichage_promo(matieres, notes) :
         for i in range(len(matieres)):
             print formatnote.format(notes[nom][i]),
         # affichage da la note
-        print ""
-    moy = moyennes.calcul_moyennes(notes)
+        print formatnote.format(moyennes_eleves[nom])
+    moy = moyennes.calcul_moyennes_matieres(notes)
+    moyennes_promo = moyennes.calcul_moyennes_promo(coeffs, moy)
     # affichage des moyennes
     print maxnom*'-'
-    print formatnom.format('moyenne'),
+    print formatnom.format('Moyenne'),
     for i in range(len(matieres)):
         print formatnote.format(moy[i]),
-    print ""
+    print formatnote.format(moyennes_promo)
 
 
 def affichage_etudiant(nom, matieres, notes):
@@ -59,4 +62,4 @@ def affichage_etudiant(nom, matieres, notes):
 #================================================================#
 if __name__ == '__main__':
     (matieres, coeffs, notes) = sauvegardelecture.lecture('notes.txt')
-    affichage_promo(matieres, notes)
+    affichage_promo(matieres, coeffs, notes)
