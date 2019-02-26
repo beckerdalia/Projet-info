@@ -15,7 +15,11 @@ def saisie_nom():
             print "votre choix ('{}') n'est pas sous la forme 'NOM Prénom'. Veuillez ressayer".format(nom)
         else:
             if nomsplit[0] != nomsplit[0].upper():
-                print "le nom de faimille de votre choix ('{}') n'est pas en majuscules'. Veuillez ressayer".format(nom)
+                print "le nom de famille de votre choix ('{}') n'est pas en majuscules'. Veuillez ressayer".format(nom)
+            elif nomsplit[1][0]  != nomsplit[1][0].upper():
+                print "le prénom de votre choix ('{}') n'est pas correct'. Veuillez ressayer".format(nom)
+            elif nomsplit[1][1:] != nomsplit[1][1:].lower():
+                print "le prénom de votre choix ('{}') n'est pas correct'. Veuillez ressayer".format(nom)
             else:
                 nom_valide = True
         if nom_valide:

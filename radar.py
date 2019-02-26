@@ -2,14 +2,14 @@
 import math, copy
 import matplotlib.pyplot as plt
 from sauvegardelecture import lecture
-from moyennes import calcul_moyennes
+from moyennes import calcul_moyennes_matieres
 
 #----------------------------------
 def diagramme_radar(nom, matieres, notes):
     """
     Affichage de type radar des résultats de l'élève nom
     """
-    moyennes = calcul_moyennes(notes)
+    moyennes = calcul_moyennes_matieres(matieres, notes)
     noteseleve = copy.deepcopy(notes[nom])
     deuxpisurn = 2 * math.pi / len(matieres)
     nbmatieres=len(matieres)+1

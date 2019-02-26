@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import affichage, sauvegardelecture, gestion_etudiants, outils_clavier, quitter, radar, suppression
+import affichage, sauvegardelecture, gestion_etudiants, outils_clavier, quitter, radar, suppression, modification_coefficient
 
 def menu_principal():
     choix_possibles = []
@@ -23,12 +23,14 @@ def menu_principal():
 #================================================================#
 fini = False
 # matieres, coeffs, notes = sauvegardelecture.lecture('notes.txt')
+matieres, coeffs, notes = None, None, None
+# pour traiter le cas où on n'a pas encore chargé un fichier
 while not fini:
     choix = menu_principal()
     if choix == 1:
         matieres, coeffs, notes = sauvegardelecture.lecture()
     elif choix == 2:
-        affichage.affichage_promo(matieres, notes)
+        affichage.affichage_promo(matieres, coeffs, notes)
     elif choix == 3:
         noms = notes.keys()
         nom, numero = outils_clavier.affiche_et_choix(noms)
@@ -51,7 +53,7 @@ while not fini:
     elif choix == 10:
         raise NotImplementedError("???")
     elif choix == 11:
-        raise NotImplementedError("???")
+        coeffs = modification_coefficient.modification_coeff(matieres, coeffs)
     elif choix == 12:
         quitter.efface_ecran()
         fini = True

@@ -1,13 +1,21 @@
+# -*- coding: utf-8 -*-
+import sauvegardelecture, outils_clavier
 
-def modification_coeff( dico_matiere) :
-    matiere=raw_input("veuillez choisir une matière :  ")
-    while matiere in  dico_matiere == False :
-    #on verifie si la matiere est bien saisie par l'utilisateur
-        print " vérifiez la cohérence de votre saisie , voici la liste des matières"
-        print dico_matiere.keys()
-        matiere=raw_input("veuillez choisir une matière :  ")
-    coeff=raw_input("veuillez donner le nouveau coefficient de la matière " )
-    dico_matiere[matiere]=coeff
-    print " Le coefficient a bien été modifié."
-    return dico_matiere
-    
+def modification_coeff(matieres, coeffs) :
+    matiere, choix = outils_clavier.affiche_et_choix(matieres)
+    coeff=raw_input("Veuillez donner le nouveau coefficient de la matière: " )
+    for i,mat in enumerate(matieres):
+        if mat==matiere:
+            coeffs[i] = float(coeff)
+            break
+    return coeffs
+
+
+# ================================================================#
+if __name__ == '__main__':
+    (matieres, coeffs, notes) = sauvegardelecture.lecture('notes.txt')
+    print "avant coeffs", coeffs
+    coeffs = modification_coeff(matieres, coeffs)
+    print "après coeffs", coeffs
+
+
