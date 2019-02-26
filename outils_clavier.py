@@ -34,6 +34,8 @@ def affiche_et_choix(choix_possibles):
     retour: choix (string)
     """
     n = len(choix_possibles)
+    if n==0:
+        return None
     for (i, choix) in enumerate(choix_possibles):
         if n < 10:
             print "\t({:1d}) {}".format(i+1,choix)
@@ -50,6 +52,8 @@ def affiche_et_choix(choix_possibles):
             choix = int(choix)
             choix_valide = choix in range(1,1+n)
         except:
+            if choix == '':
+                print "Il n'y a rien à affficher"
             pass
         if choix_valide:
             return choix_possibles[choix-1], choix

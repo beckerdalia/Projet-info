@@ -7,7 +7,10 @@ def calcule_max(matieres, notes):
     else:
         maxnom = len(max(notes.keys(), key=len))+5
     #max des longueurs de noms pour bien aligner l'affichage
-    maxmat = len(max(max(matieres, key=len),'Moyenne'))+5
+    if len(matieres)==0:
+        maxmat=0
+    else:
+        maxmat = len(max(max(matieres, key=len),'Moyenne'))+5
     #de même pour les longueurs des matières
     return maxnom, maxmat
 

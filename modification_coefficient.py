@@ -3,7 +3,14 @@ import sauvegardelecture, outils_clavier
 
 def modification_coeff(matieres, coeffs) :
     matiere, choix = outils_clavier.affiche_et_choix(matieres)
-    coeff=raw_input("Veuillez donner le nouveau coefficient de la matière: " )
+    saisieOk= False
+    while not saisieOk:
+        coeff=raw_input("Veuillez donner le nouveau coefficient de la matière: " )
+        try:
+            coeff=float(coeff)
+            saisieOk=True
+        except:
+            print "Ce nombre n'est pas bien écrit (mettez un '.' au lieu de ',' ) "
     for i,mat in enumerate(matieres):
         if mat==matiere:
             coeffs[i] = float(coeff)
