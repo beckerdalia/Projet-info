@@ -47,7 +47,7 @@ def affiche_et_choix(choix_possibles):
             raise NotImplementedError("trop de choix ({})".format(n))
     choix_valide=False
     while not choix_valide:
-        choix = raw_input("Donner votre choix (un chiffre) et valider avec entrée :").strip()
+        choix = raw_input("Donner votre choix (un chiffre) et valider avec entrée :\n").strip()
         try:
             choix = int(choix)
             choix_valide = choix in range(1,1+n)

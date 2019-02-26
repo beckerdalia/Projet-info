@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import sauvegardelecture
+import sauvegardelecture, affichage, outils_clavier
 
 def supprimer_etudiant(nom, notes):
     """
@@ -20,26 +20,24 @@ def supprimer_tous(notes):
         notes = {}
     return notes
 
-def suppression_matiere(notes, dico_matiere) :
-    matiere=raw_input("veuillez choisir une matière :  ")
-    while matiere in  dico_matiere == False :
-    #tant que la matiere donnee n'est pas trouvable, on demande une nouvelle saisie
-        print " vérifiez la cohérence de votre saisie , voici la liste des matières"
-        print dico_matiere.keys()
-        #on montre les matieres existantes
-        matiere=raw_input("veuillez choisir une matière :  ")
-    x=dico_matiere.keys().index(matiere)
+def suppression_matiere(matsup, matieres, coeffs, notes):
+    x=matieres.index(matsup)
     #position de la matiere dans le dictionnaire
-    del dico_matiere[matiere]
-    for nom  in notes :
+    matieres.remove(matsup)
+    #effacer un élément d'une liste par valeur
+    coeffs.pop(x)
+    #effacer un élément d'une liste par indice
+    for nom  in notes.keys():
         notes[nom].pop(x)
-    return None
+    return matieres, coeffs, notes
 
 #================================================================#
 if __name__ == '__main__':
     (matieres, coeffs, notes) = sauvegardelecture.lecture('notes.txt')
     notes = supprimer_etudiant(notes.keys()[0], notes)
     print "notes après suppresion du premier élève", notes
+    affichage.affichage_promo(matieres, coeffs, notes)
+    matieres, coeffs, notes = suppression_matiere(matieres[0], matieres, coeffs, notes)
+    affichage.affichage_promo(matieres, coeffs, notes)
     notes = supprimer_tous(notes)
     print "notes après suppresion de tous les élèves", notes
-    # affichage_promo(matieres, notes)

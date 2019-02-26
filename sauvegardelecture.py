@@ -16,13 +16,17 @@ def sauvegarde(matieres, coeffs, notes, nom_fichier=''):
     retour: rien
     """
     if nom_fichier == "":
-        nom_fichier = raw_input("Choisissez le nom du fichier dans lequel vous souhaitez effectuer le sauvegarde : ").strip()
-        if os.path.isfile(nom_fichier):
-            reponse = raw_input("Le fichier existe, etes-vous sur de vouloir le remplacer? Repondez: Oui ou Non :")
-            if reponse == "Non":
-                while os.path.isfile(nom_fichier):
-                    # boucle jusqu'à ce qu'un nom d'un fichier inexistant soit trouvé
-                    nom_fichier = raw_input("Choisissez le nom du fichier a écrire : ").strip()
+        saisieok = False
+        while not saisieok:
+            nom_fichier = raw_input("Choisissez le nom du fichier dans lequel vous souhaitez effectuer la sauvegarde : ").strip()
+            if os.path.isfile(nom_fichier):
+                reponse = raw_input("Le fichier existe, etes-vous sur de vouloir le remplacer? Repondez: Oui ou Non :")
+                if reponse == "Oui":
+                    saisieok = True
+            elif nom_fichier == "":
+                print "non compris"
+            else:
+                saisieok = True
 
     with open(nom_fichier,'w') as file:
         file.write(",".join(matieres))

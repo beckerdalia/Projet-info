@@ -57,41 +57,7 @@ def affichage_promo_string(matieres, coeffs, notes):
 def affichage_promo(matieres, coeffs, notes) :
     # permet d'afficher le tableau avec les moyennes
     print affichage_promo_string(matieres, coeffs, notes)
-    return
-
-    maxnom, maxmat = calcule_max(matieres, notes)
-
-    moyennes_eleves = moyennes.calcul_moyennes_eleves(matieres,coeffs, notes)
-
-    formatnom = "{:"+str(maxnom)+"s}"
-    formatmat = "{:>"+str(maxmat)+"s}"
-    formatnote = "{:"+str(maxmat)+".2f}"
-    # string pour le format de l'affichage utilisé en-dessous
-
-    print formatnom.format(""),
-    # champ de nom vide pour l'affichage des matières
-    for i in range(len(matieres)):
-        print formatmat.format(matieres[i]),
-        # affichage des matières en ligne (avec la virgule) de même longueur
-    print formatmat.format("Moyenne")
-    # saut à la ligne
-    eleves = sorted(notes.keys())
-    #tri des élèves dans l'ordre alphabétique
-    for nom in eleves:
-        print formatnom.format(nom),
-        # affichage du nom
-        for i in range(len(matieres)):
-            print formatnote.format(notes[nom][i]),
-        # affichage da la note
-        print formatnote.format(moyennes_eleves[nom])
-    moy = moyennes.calcul_moyennes_matieres(matieres, notes)
-    moyennes_promo = moyennes.calcul_moyennes_promo(coeffs, moy)
-    # affichage des moyennes
-    print maxnom*'-'
-    print formatnom.format('Moyenne'),
-    for i in range(len(matieres)):
-        print formatnote.format(moy[i]),
-    print formatnote.format(moyennes_promo)
+    return None
 
 
 def affichage_etudiant(nom, matieres, notes):

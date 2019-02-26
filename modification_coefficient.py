@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 import sauvegardelecture, outils_clavier
 
-def modification_coeff(matieres, coeffs) :
+def modification_coeff(matieres, coeffs):
     matiere, choix = outils_clavier.affiche_et_choix(matieres)
     saisieOk= False
     while not saisieOk:
+    #boucle pour s'assurer d'une saisie correcte
         coeff=raw_input("Veuillez donner le nouveau coefficient de la matière: " )
         try:
             coeff=float(coeff)
@@ -15,6 +16,7 @@ def modification_coeff(matieres, coeffs) :
         if mat==matiere:
             coeffs[i] = float(coeff)
             break
+            # on quitte la boucle
     return coeffs
 
 

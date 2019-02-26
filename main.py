@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import affichage, sauvegardelecture, gestion_etudiants, outils_clavier, quitter, radar, suppression, modification_coefficient
+import affichage, sauvegardelecture, gestion_etudiants, outils_clavier, quitter, radar, suppression, modification_coefficient, saisie_matieres
 
 def menu_principal():
     choix_possibles = []
@@ -38,7 +38,7 @@ while not fini:
         if matieres is None or len(notes.keys())==0:
             print "Il n'y a aucun étudiant !"
         else:
-            nom, numero = outils_clavier.affiche_et_choix(noms)
+            nom, numero = outils_clavier.affiche_et_choix(notes.keys())
             affichage.affichage_etudiant(nom, matieres, notes)
             radar.diagramme_radar(nom, matieres, notes)
     elif choix == 4:
@@ -72,12 +72,13 @@ while not fini:
         if matieres is None:
             print "Il faut d'abord charger les notes"
         else:
-            raise NotImplementedError("???")
+            (matieres, coeffs, notes) = saisie_matieres.saisie_matiere(matieres, coeffs, notes)
     elif choix == 10:
         if matieres is None:
             print "Il faut d'abord charger les notes"
         else:
-            raise NotImplementedError("???")
+            matsup, numero = outils_clavier.affiche_et_choix(matieres)
+            matieres, coeffs, notes = suppression.suppression_matiere(matsup, matieres, coeffs, notes)
     elif choix == 11:
         if matieres is None:
             print "Il faut d'abord charger les notes"
