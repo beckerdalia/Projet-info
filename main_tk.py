@@ -67,48 +67,6 @@ class Fenetrage:
         self.text.delete('1.0', tk.END)
         self.text.insert(tk.END, texte)
 
-
-    def configCanvas(self, event):
-        x, y, self.cancas_w, self.canvas_h = event.x, event.y, event.width, event.height
-
-    def creerGrille(self):
-        canvas = self.canvas
-        w, h = self.cancas_w, self.canvas_h
-        maxnom, maxmat = affichage.calcule_taille(self.matieres, self.notes)
-        noms = sorted(self.notes.keys())
-        nmat = len(self.matieres)
-        nnoms = len(noms)
-        mat = self.matieres
-        # par ligne il nous faut maxnom+maxmat*nmat
-        # il nous faut 2+nnoms colonnes
-        canvas.delete('grid_line')
-        canvas.delete('grid_index')
-        print "h={} w={}".format(h, w)
-        nw = w / float(maxnom+maxmat*nmat)
-        nh = h / float(2+nnoms)
-        print "nw", nw, "nh", nh
-        canvas.create_line([(nw*maxnom, nh), (nw*maxnom, h - nh)], tag='grid_line')
-        for i in range(1,nmat):
-            x = nw*maxnom+ i*nw*maxmat
-            canvas.create_line([(x, nh), (x, h - nh)], tag='grid_line')
-        for i in range(nmat):
-            x = nw*maxnom+ i*nw*maxmat
-            y = 0.5 * nh
-            canvas.create_text((x,y), text="{}".format(mat[i]), tag='grid_index')
-        for i in range(nnoms):
-            x = 0.5*nw
-            y = nh + i*nh
-            canvas.create_text((x,y), text="{}".format(noms[i]), tag='grid_index')
-        #
-        # for i in range(1, 12):
-        #     canvas.create_line([(i * nw, nh), (i * nw, h - nh)], tag='grid_line')
-        # for i in range(1, 12):
-        #     canvas.create_line([(nw, i * nh), (w - nw, i * nh)], tag='grid_line')
-        # for i in range(10):
-        #     canvas.create_text((1.5 * nw + i * nw, 0.5 * nh), text="{}".format(i), tag='grid_index')
-        # for i in range(10):
-        #     canvas.create_text((0.5 * nw, 1.5 * nh + i * nh), text="{}".format(unichr(97 + i)), tag='grid_index')
-
     def definir_menu(self):
         size = (600,400)
         self.frame = tk.Frame(self.root, width=size[0], height=size[1], bd=2, relief=tk.SUNKEN)
@@ -116,10 +74,6 @@ class Fenetrage:
         self.text = tk.Text(self.frame, height=20, width=100)
         self.text.pack(side="left", expand=True, fill=tk.BOTH)
         self.text.insert(tk.END, "Veuillez charger les notes\n")
-
-        # self.canvas= tk.Canvas(self.frame, width=size[0], height=size[1], background='light green')
-        # self.canvas.pack(side="left", expand=True, fill=tk.BOTH)
-        # self.canvas.bind('<Configure>', self.configCanvas)
 
 # honteusement copiè de https://www.tutorialspoint.com/python/tk_menu.htm
         menubar = tk.Menu(self.root)

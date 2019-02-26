@@ -20,7 +20,7 @@ def affichage_promo_string(matieres, coeffs, notes):
 
     formatnom = "{:"+str(maxnom)+"s}"
     formatmat = "{:>"+str(maxmat)+"s}"
-    formatnote = "{:"+str(maxmat)+".2f}"
+    formatnote = "{:>"+str(maxmat)+".2f}"
     # string pour le format de l'affichage utilisé en-dessous
 
     resultat = ""
