@@ -1,15 +1,16 @@
 # -*- coding: utf-8 -*-
 import sauvegardelecture, moyennes
 
-def affichage_promo(matieres, notes) :
-    # permet d'afficher le tableau avec les moyennes
-    eleves = sorted(notes)
-    #tri des élèves dans l'ordre alphabétique
-    maxnom = len(max(eleves, key=len))+5
+def calcule_taille(matieres, notes):
+    maxnom = len(max(notes.keys(), key=len))+5
     #max des longueurs de noms pour bien aligner l'affichage
     maxmat = len(max(matieres, key=len))+5
     #de même pour les longueurs des matières
+    return maxnom, maxmat
 
+def affichage_promo(matieres, notes) :
+    # permet d'afficher le tableau avec les moyennes
+    maxnom, maxmat = calcule_taille(matieres, notes)
     formatnom = "{:"+str(maxnom)+"s}"
     formatmat = "{:>"+str(maxmat)+"s}"
     formatnote = "{:"+str(maxmat)+".2f}"
@@ -22,6 +23,8 @@ def affichage_promo(matieres, notes) :
         # affichage des matières en ligne (avec la virgule) de même longueur
     print ""
     # saut à la ligne
+    eleves = sorted(notes.keys())
+    #tri des élèves dans l'ordre alphabétique
     for nom in eleves:
         print formatnom.format(nom),
         # affichage du nom

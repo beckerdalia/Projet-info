@@ -13,7 +13,6 @@ def get_note(matiere, nom):
         if note_valide:
             return note
 
-
 def ajout_etudiant(notes, matieres):
     nom = outils_clavier.saisie_nom()
     while nom in notes:

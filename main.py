@@ -21,38 +21,37 @@ def menu_principal():
 
 
 #================================================================#
-if __name__ == '__main__':
-    fini = False
-    matieres, coeffs, notes = sauvegardelecture.lecture('notes.txt')
-    while not fini:
-        choix = menu_principal()
-        if choix == 1:
-            matieres, coeffs, notes = sauvegardelecture.lecture()
-        elif choix == 2:
-            affichage.affichage_promo(matieres, notes)
-        elif choix == 3:
-            noms = notes.keys()
-            nom, numero = outils_clavier.affiche_et_choix(noms)
-            affichage.affichage_etudiant(nom, matieres, notes)
-            radar.diagramme_radar(nom, matieres, notes)
-        elif choix == 4:
-            gestion_etudiants.ajout_etudiant(notes, matieres)
-        elif choix == 5:
-            gestion_etudiants.saisie_etudiant(notes, matieres)
-        elif choix == 6:
-            noms = notes.keys()
-            nom, numero = outils_clavier.affiche_et_choix(noms)
-            notes = suppression.supprimer_etudiant(nom, notes)
-        elif choix == 7:
-            notes = suppression.supprimer_tous(notes)
-        elif choix == 8:
-            sauvegardelecture.sauvegarde(matieres, coeffs, notes)
-        elif choix == 9:
-            raise NotImplementedError("???")
-        elif choix == 10:
-            raise NotImplementedError("???")
-        elif choix == 11:
-            raise NotImplementedError("???")
-        elif choix == 12:
-            quitter.efface_ecran()
-            fini = True
+fini = False
+# matieres, coeffs, notes = sauvegardelecture.lecture('notes.txt')
+while not fini:
+    choix = menu_principal()
+    if choix == 1:
+        matieres, coeffs, notes = sauvegardelecture.lecture()
+    elif choix == 2:
+        affichage.affichage_promo(matieres, notes)
+    elif choix == 3:
+        noms = notes.keys()
+        nom, numero = outils_clavier.affiche_et_choix(noms)
+        affichage.affichage_etudiant(nom, matieres, notes)
+        radar.diagramme_radar(nom, matieres, notes)
+    elif choix == 4:
+        gestion_etudiants.ajout_etudiant(notes, matieres)
+    elif choix == 5:
+        gestion_etudiants.saisie_etudiant(notes, matieres)
+    elif choix == 6:
+        noms = notes.keys()
+        nom, numero = outils_clavier.affiche_et_choix(noms)
+        notes = suppression.supprimer_etudiant(nom, notes)
+    elif choix == 7:
+        notes = suppression.supprimer_tous(notes)
+    elif choix == 8:
+        sauvegardelecture.sauvegarde(matieres, coeffs, notes)
+    elif choix == 9:
+        raise NotImplementedError("???")
+    elif choix == 10:
+        raise NotImplementedError("???")
+    elif choix == 11:
+        raise NotImplementedError("???")
+    elif choix == 12:
+        quitter.efface_ecran()
+        fini = True
