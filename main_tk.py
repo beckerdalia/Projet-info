@@ -57,10 +57,16 @@ class Fenetrage:
         self.filename = tkFileDialog.askopenfilename(initialdir=".", title="Choisir le fichier",
                                                      filetypes=(("fichiers txt", "*.txt"), ("all files", "*.*")))
         self.matieres, self.coeffs, self.notes = sauvegardelecture.lecture(self.filename)
-        self.creerGrille()
+        texte =  affichage.affichage_promo_string(self.matieres, self.coeffs, self.notes)
+        self.creerTexte(texte)
 
     def sauvegarde(self):
         pass
+
+    def creerTexte(self, texte):
+        self.text.delete('1.0', tk.END)
+        self.text.insert(tk.END, texte)
+
 
     def configCanvas(self, event):
         x, y, self.cancas_w, self.canvas_h = event.x, event.y, event.width, event.height
@@ -107,9 +113,13 @@ class Fenetrage:
         size = (600,400)
         self.frame = tk.Frame(self.root, width=size[0], height=size[1], bd=2, relief=tk.SUNKEN)
         self.frame.pack(expand=True, fill=tk.BOTH)
-        self.canvas= tk.Canvas(self.frame, width=size[0], height=size[1], background='light green')
-        self.canvas.pack(side="left", expand=True, fill=tk.BOTH)
-        self.canvas.bind('<Configure>', self.configCanvas)
+        self.text = tk.Text(self.frame, height=20, width=100)
+        self.text.pack(side="left", expand=True, fill=tk.BOTH)
+        self.text.insert(tk.END, "Veuillez charger les notes\n")
+
+        # self.canvas= tk.Canvas(self.frame, width=size[0], height=size[1], background='light green')
+        # self.canvas.pack(side="left", expand=True, fill=tk.BOTH)
+        # self.canvas.bind('<Configure>', self.configCanvas)
 
 # honteusement copiè de https://www.tutorialspoint.com/python/tk_menu.htm
         menubar = tk.Menu(self.root)
