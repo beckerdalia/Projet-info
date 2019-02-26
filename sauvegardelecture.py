@@ -2,6 +2,21 @@
 import os.path
 # module qui permet de verifier si un fichier existe
 
+def ecrire_dans_fichier(matieres, coeffs, notes, nom_fichier):
+    with open(nom_fichier,'w') as file:
+        file.write(",".join(matieres))
+        # on assemble la liste des matières en un string en séparant par des virgules
+        file.write("\n")
+        file.write(",".join([str(c) for c in coeffs]))
+        # même chose pour les coeffs, mais il faut les convirtir en string d'abord
+        file.write("\n")
+        for nom in sorted(notes):
+            file.write(nom)
+            for note in notes[nom]:
+                file.write(",{}".format(note))
+            file.write("\n")
+
+
 #----------------------------------
 def sauvegarde(matieres, coeffs, notes, nom_fichier=''):
     """
@@ -28,18 +43,19 @@ def sauvegarde(matieres, coeffs, notes, nom_fichier=''):
             else:
                 saisieok = True
 
-    with open(nom_fichier,'w') as file:
-        file.write(",".join(matieres))
-        # on assemble la liste des matières en un string en séparant par des virgules
-        file.write("\n")
-        file.write(",".join([str(c) for c in coeffs]))
-        # même chose pour les coeffs, mais il faut les convirtir en string d'abord
-        file.write("\n")
-        for nom in sorted(notes):
-            file.write(nom)
-            for note in notes[nom]:
-                file.write(",{}".format(note))
-            file.write("\n")
+    ecrire_dans_fichier(matieres, coeffs, notes, nom_fichier)
+    # with open(nom_fichier,'w') as file:
+    #     file.write(",".join(matieres))
+    #     # on assemble la liste des matières en un string en séparant par des virgules
+    #     file.write("\n")
+    #     file.write(",".join([str(c) for c in coeffs]))
+    #     # même chose pour les coeffs, mais il faut les convirtir en string d'abord
+    #     file.write("\n")
+    #     for nom in sorted(notes):
+    #         file.write(nom)
+    #         for note in notes[nom]:
+    #             file.write(",{}".format(note))
+    #         file.write("\n")
 
 #----------------------------------
 def lecture(nom_fichier=""):

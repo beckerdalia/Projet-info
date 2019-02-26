@@ -14,7 +14,7 @@ class Fenetrage:
     """
     def __init__(self, root):
         self.root = root
-        self.root.title('Notes')
+        self.root.title('Gestion de notes')
         self.definir_menu()
         self.matieres = None
         self.coeffs = None
@@ -28,7 +28,6 @@ class Fenetrage:
 
     def radarbuttonfini(self):
         choix_etudiant = self.variable.get()
-        print "choix_etudiant", choix_etudiant
         self.top.destroy()
         radar.diagramme_radar(choix_etudiant, self.matieres, self.notes)
 
@@ -54,24 +53,26 @@ class Fenetrage:
 
     def lecture(self):
         # https://pythonspot.com/tk-file-dialogs/
-        self.filename = tkFileDialog.askopenfilename(initialdir=".", title="Choisir le fichier",
-                                                     filetypes=(("fichiers txt", "*.txt"), ("all files", "*.*")))
+        self.filename = tkFileDialog.askopenfilename(title="Choisir le fichier",defaultextension='txt')
         self.matieres, self.coeffs, self.notes = sauvegardelecture.lecture(self.filename)
         texte =  affichage.affichage_promo_string(self.matieres, self.coeffs, self.notes)
-        self.creerTexte(texte)
-
-    def sauvegarde(self):
-        pass
-
-    def creerTexte(self, texte):
         self.text.delete('1.0', tk.END)
         self.text.insert(tk.END, texte)
 
+    def sauvegarde(self):
+        sauvegardelecture.ecrire_dans_fichier(self.matieres, self.coeffs, self.notes, self.filename)
+
+    def sauvegardesous(self):
+        filename = tkFileDialog.asksaveasfilename(title="Choisir le fichier", defaultextension='txt')
+        if filename:
+            sauvegardelecture.ecrire_dans_fichier(self.matieres, self.coeffs, self.notes, filename)
+
+
     def definir_menu(self):
-        size = (600,400)
-        self.frame = tk.Frame(self.root, width=size[0], height=size[1], bd=2, relief=tk.SUNKEN)
-        self.frame.pack(expand=True, fill=tk.BOTH)
-        self.text = tk.Text(self.frame, height=20, width=100)
+        frame = tk.Frame(self.root, width=600, height=400, bd=2, relief=tk.SUNKEN)
+        frame.pack(expand=True, fill=tk.BOTH)
+
+        self.text = tk.Text(frame, height=20, width=100)
         self.text.pack(side="left", expand=True, fill=tk.BOTH)
         self.text.insert(tk.END, "Veuillez charger les notes\n")
 
@@ -79,31 +80,33 @@ class Fenetrage:
         menubar = tk.Menu(self.root)
 
         menu_fichier = tk.Menu(menubar, tearoff=0)
-        menu_fichier.add_command(label="Lecture", command=self.lecture)
-        menu_fichier.add_command(label="Save", command=self.nada)
-        menu_fichier.add_command(label="Save as...", command=self.nada)
+        menu_fichier.add_command(label="Charger", command=self.lecture)
+        menu_fichier.add_command(label="Sauvegarder", command=self.sauvegarde)
+        menu_fichier.add_command(label="Sauvegarder sous...", command=self.sauvegardesous)
 
-        editmenu = tk.Menu(menubar, tearoff=0)
-        editmenu.add_command(label="Undo", command=self.nada)
-        editmenu.add_separator()
-        editmenu.add_command(label="Cut", command=self.nada)
-        editmenu.add_command(label="Copy", command=self.nada)
-        editmenu.add_command(label="Paste", command=self.nada)
-        editmenu.add_command(label="Delete", command=self.nada)
-        editmenu.add_command(label="Select All", command=self.nada)
+        # editmenu = tk.Menu(menubar, tearoff=0)
+        # editmenu.add_command(label="Undo", command=self.nada)
+        # editmenu.add_separator()
+        # editmenu.add_command(label="Cut", command=self.nada)
+        # editmenu.add_command(label="Copy", command=self.nada)
+        # editmenu.add_command(label="Paste", command=self.nada)
+        # editmenu.add_command(label="Delete", command=self.nada)
+        # editmenu.add_command(label="Select All", command=self.nada)
 
-        menu_quitter = tk.Menu(menubar, tearoff=0)
-        menu_quitter.add_command(label="Quitter", command=self.quitter)
-        menu_quitter.add_command(label="Radar", command=self.radar)
+        # menu_quitter = tk.Menu(menubar, tearoff=0)
+        # menu_quitter.add_command(label="Quitter", command=self.quitter)
+        # menu_quitter.add_command(label="Radar", command=self.radar)
 
-        helpmenu = tk.Menu(menubar, tearoff=0)
-        helpmenu.add_command(label="Help Index", command=self.nada)
-        helpmenu.add_command(label="About...", command=self.nada)
+        # helpmenu = tk.Menu(menubar, tearoff=0)
+        # helpmenu.add_command(label="Help Index", command=self.nada)
+        # helpmenu.add_command(label="About...", command=self.nada)
 
         menubar.add_cascade(label="Fichier", menu=menu_fichier)
-        menubar.add_cascade(label="Edit", menu=editmenu)
-        menubar.add_cascade(label="Autres", menu=menu_quitter)
-        menubar.add_cascade(label="Help", menu=helpmenu)
+        # menubar.add_cascade(label="Edit", menu=editmenu)
+        # menubar.add_cascade(label="Autres", menu=menu_quitter)
+        menubar.add_command(label="Quitter", command=self.quitter)
+        menubar.add_command(label="Radar", command=self.radar)
+        # menubar.add_cascade(label="Help", menu=helpmenu)
 
         self.root.config(menu=menubar)
 
