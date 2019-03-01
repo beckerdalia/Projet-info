@@ -22,6 +22,7 @@ def saisie_note(matiere, nom):
         if note_valide:
             return note
 
+
 def ajout_etudiant(notes, matieres):
     """
     Rajout d'un étudiant

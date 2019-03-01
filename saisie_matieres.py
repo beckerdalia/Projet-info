@@ -1,7 +1,21 @@
 # -*- coding: utf-8 -*-
 import sauvegardelecture, affichage, gestion_etudiants
 
+def ajout_matiere(matiere, coeff, notesmat, matieres, coeffs, notes):
+    """
+    modifier la bas de données pour une matière, un coefficient et la liste des notes de cette matière
+    """
+    matieres.append(matiere)
+    coeffs.append(coeff)
+    for i,nom in enumerate(notes.keys()):
+        notes[nom].append(notesmat[i])
+    return matieres, coeffs, notes
+
+
 def saisie_matiere(matieres, coeffs, notes):
+    """
+    saisie les informations nécessaires (nom, coefficient, notes) pour une nouvelle matière
+    """
     saisieok = False
     while not saisieok:
     # boucle pour s'assurer d'une saisie correcte
@@ -21,13 +35,11 @@ def saisie_matiere(matieres, coeffs, notes):
                 print "Ce n'est pas un nombre positif"
         except:
             print "Ce n'est pas un nombre"
-    matieres.append(matiere)
-    coeffs.append(coeff)
+    notesmat = []
     for nom in notes.keys():
         note = gestion_etudiants.saisie_note(matiere, nom)
-        # on utilise notre fonction pour la saise d'une note pour nom et matière donnés
-        notes[nom].append(note)
-    return matieres, coeffs, notes
+        notesmat.append(note)
+    return ajout_matiere(matiere, coeff, notesmat, matieres, coeffs, notes)
 
 
 #================================================================#
