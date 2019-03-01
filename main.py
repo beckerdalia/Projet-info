@@ -1,6 +1,14 @@
 # -*- coding: utf-8 -*-
 import affichage, sauvegardelecture, gestion_etudiants, outils_clavier, quitter, radar, suppression, modification_coefficient, saisie_matieres
 
+
+"""
+Nous utilisons trois champs pour représenter les donnée:
+    matieres: liste de str
+    coeffs:   liste de float (de même longuer que matieres)
+    notes:    dictionnaire nom --> list de notes (de même longuer que matieres)
+"""
+
 def menu_principal():
     choix_possibles = []
     choix_possibles.append("Charger en mémoire le fichier de notes.")
