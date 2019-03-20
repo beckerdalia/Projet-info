@@ -36,7 +36,7 @@ def sauvegarde(matieres, coeffs, notes, nom_fichier=''):
             nom_fichier = raw_input("Choisissez le nom du fichier dans lequel vous souhaitez effectuer la sauvegarde : ").strip()
             if os.path.isfile(nom_fichier):
                 reponse = raw_input("Le fichier existe, etes-vous sur de vouloir le remplacer? Repondez: Oui ou Non :")
-                if reponse == "Oui":
+                if reponse == "Oui" or reponse == "oui":
                     saisieok = True
             elif nom_fichier == "":
                 print "non compris"
