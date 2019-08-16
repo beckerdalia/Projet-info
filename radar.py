@@ -17,23 +17,23 @@ def diagramme_radar(nom, matieres, notes):
     # on rajoute la première note à la fin pour finir le dessin de la boucle en matplotlib
     moyennes.append(moyennes[0])
     # de même pour les moyennes
-    x = [math.cos(k * deuxpisurn) for k in xrange(nbmatieres)]
-    y = [math.sin(k * deuxpisurn) for k in xrange(nbmatieres)]
+    x = [math.cos(k * deuxpisurn) for k in range(nbmatieres)]
+    y = [math.sin(k * deuxpisurn) for k in range(nbmatieres)]
     # coordonnées polaires pour le calcul des positions
-    xd = [0.5 * x[k] for k in xrange(nbmatieres)]
-    yd = [0.5 * y[k] for k in xrange(nbmatieres)]
+    xd = [0.5 * x[k] for k in range(nbmatieres)]
+    yd = [0.5 * y[k] for k in range(nbmatieres)]
     # moyenne à 10
-    xn = [noteseleve[k]/20.0 * x[k] for k in xrange(nbmatieres)]
-    yn = [noteseleve[k]/20.0 * y[k] for k in xrange(nbmatieres)]
+    xn = [noteseleve[k]/20.0 * x[k] for k in range(nbmatieres)]
+    yn = [noteseleve[k]/20.0 * y[k] for k in range(nbmatieres)]
     # moyenne élève
-    xm = [moyennes[k]/20.0 * x[k] for k in xrange(nbmatieres)]
-    ym = [moyennes[k]/20.0 * y[k] for k in xrange(nbmatieres)]
+    xm = [moyennes[k]/20.0 * x[k] for k in range(nbmatieres)]
+    ym = [moyennes[k]/20.0 * y[k] for k in range(nbmatieres)]
     # moyenne promo
 
     plt.figure(figsize=(6, 6))
     plt.axis([-1.25, 1.75, -1.5, 1.5])
     plt.title(nom, fontweight='bold')
-    for k in xrange(len(matieres)):
+    for k in range(len(matieres)):
         plt.plot([0, x[k]], [0, y[k]], '-k' )
         plt.plot(x[k], y[k], 'ok')
         va = 'bottom'
@@ -52,5 +52,5 @@ def diagramme_radar(nom, matieres, notes):
 #================================================================#
 if __name__ == '__main__':
     (matieres, coeffs, notes) = lecture('notes.txt')
-    nom = notes.keys()[0]
+    nom = list(notes.keys())[0]
     diagramme_radar(nom, matieres, notes)

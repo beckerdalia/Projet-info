@@ -35,12 +35,12 @@ def calcul_moyennes_eleves(matieres, coeffs, notes):
     """
     somme_coeff = np.sum(coeffs)
     nmat = len(matieres)
-    neleves = len(notes.keys())
+    neleves = len(list(notes.keys()))
     # nmat est le nombre de matières, car values() rend la liste des valeurs d'un dico, ici les listes de notes
     ms = {}
     for nom in notes:
         ms[nom] = 0.0
-    for nom,notesmat in notes.iteritems():
+    for nom,notesmat in notes.items():
         # c'est la liste des notes d'un élève
         if len(notesmat)!=nmat:
             raise ValueError("pas le bon nombre de notes (notesmat={} nmat={})".format(notesmat, nmat))
@@ -54,6 +54,6 @@ def calcul_moyennes_eleves(matieres, coeffs, notes):
 if __name__ == '__main__':
     (matieres, coeffs, notes) = lecture('notes.txt')
     moyennes_matieres = calcul_moyennes_matieres(matieres, notes)
-    print "moyennes_matieres", moyennes_matieres
+    print("moyennes_matieres", moyennes_matieres)
     moyennes_eleves = calcul_moyennes_eleves(matieres, coeffs, notes)
-    print "moyennes_eleves", moyennes_eleves
+    print("moyennes_eleves", moyennes_eleves)

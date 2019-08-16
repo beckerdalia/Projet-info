@@ -27,12 +27,12 @@ def saisie_nom():
     """
     nom_valide = False
     while not nom_valide:
-        nom = raw_input("Donnez le NOM et Prénom de l'élève à ajouter (exemple DUPONT Jean) : ").strip()
+        nom = input("Donnez le NOM et Prénom de l'élève à ajouter (exemple DUPONT Jean) : ").strip()
         message = tester_nom(nom)
         if message == "":
             return nom
         else:
-            print message
+            print(message)
 
         # nomsplit = nom.split()
         # if len(nomsplit) != 2:
@@ -62,35 +62,35 @@ def affiche_et_choix(choix_possibles):
         return None
     for (i, choix) in enumerate(choix_possibles):
         if n < 10:
-            print "\t({:1d}) {}".format(i+1,choix)
+            print("\t({:1d}) {}".format(i+1,choix))
             # formatage 1d: entier de 1 caractère (on commence par 1 au lieu de 0)
         elif n<100:
-            print "\t({:02d}) {}".format(i + 1, choix)
+            print("\t({:02d}) {}".format(i + 1, choix))
             # si plus de 9 choix
         else:
             raise NotImplementedError("trop de choix ({})".format(n))
     choix_valide=False
     while not choix_valide:
-        choix = raw_input("Donner votre choix (un chiffre) et valider avec entrée :\n").strip()
+        choix = input("Donner votre choix (un chiffre) et valider avec entrée :\n").strip()
         try:
             choix = int(choix)
             choix_valide = choix in range(1,1+n)
         except:
             if choix == '':
-                print "Il n'y a rien à affficher"
+                print("Il n'y a rien à affficher")
             pass
         if choix_valide:
             return choix_possibles[choix-1], choix
         else:
-            print "\nVotre choix ('{}') n'est pas un nombre entre 1 et {}.Veuillez réessayer".format(choix,n)
+            print("\nVotre choix ('{}') n'est pas un nombre entre 1 et {}.Veuillez réessayer".format(choix,n))
 
 
 #================================================================#
 if __name__ == '__main__':
     # test de la saisie de nom
     nom = saisie_nom()
-    print "nom saisi = ", nom
+    print("nom saisi = ", nom)
     # test de la saisie d'un choix
     choix = affiche_et_choix(['math', 'phys', 'svt', 'sport'])
-    print "choix saisi = ", choix
+    print("choix saisi = ", choix)
 

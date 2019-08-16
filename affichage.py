@@ -2,10 +2,10 @@
 import sauvegardelecture, moyennes
 
 def calcule_max(matieres, notes):
-    if len(notes.keys())==0:
+    if len(list(notes.keys()))==0:
         maxnom=1
     else:
-        maxnom = len(max(notes.keys(), key=len))+5
+        maxnom = len(max(list(notes.keys()), key=len))+5
     #max des longueurs de noms pour bien aligner l'affichage
     if len(matieres)==0:
         maxmat=0
@@ -56,7 +56,7 @@ def affichage_promo_string(matieres, coeffs, notes):
 
 def affichage_promo(matieres, coeffs, notes) :
     # permet d'afficher le tableau avec les moyennes
-    print affichage_promo_string(matieres, coeffs, notes)
+    print(affichage_promo_string(matieres, coeffs, notes))
     return None
 
 
@@ -69,14 +69,14 @@ def affichage_etudiant(nom, matieres, notes):
     fmtnom = "{:"+str(len(nom))+"s}"
     fmtmat = "{:^"+str(maxmat)+"s}"
 
-    print fmtnom.format(""),
+    print(fmtnom.format(""), end=' ')
     for i in range(len(matieres)):
-        print fmtmat.format(matieres[i]),
-    print ""
-    print fmtnom.format(nom),
+        print(fmtmat.format(matieres[i]), end=' ')
+    print("")
+    print(fmtnom.format(nom), end=' ')
     for i in range(nmat):
-        print fmtmat.format(str(notes[nom][i])),
-    print ""
+        print(fmtmat.format(str(notes[nom][i])), end=' ')
+    print("")
 
 #================================================================#
 if __name__ == '__main__':

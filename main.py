@@ -39,57 +39,57 @@ while not fini:
         matieres, coeffs, notes = sauvegardelecture.lecture()
     elif choix == 2:
         if matieres is None:
-            print "Il faut d'abord charger les notes"
+            print("Il faut d'abord charger les notes")
         else:
             affichage.affichage_promo(matieres, coeffs, notes)
     elif choix == 3:
-        if matieres is None or len(notes.keys())==0:
-            print "Il n'y a aucun étudiant !"
+        if matieres is None or len(list(notes.keys()))==0:
+            print("Il n'y a aucun étudiant !")
         else:
-            nom, numero = outils_clavier.affiche_et_choix(notes.keys())
+            nom, numero = outils_clavier.affiche_et_choix(list(notes.keys()))
             affichage.affichage_etudiant(nom, matieres, notes)
             radar.diagramme_radar(nom, matieres, notes)
     elif choix == 4:
         if matieres is None:
-            print "Il faut d'abord charger les notes"
+            print("Il faut d'abord charger les notes")
         else:
             gestion_etudiants.ajout_etudiant(notes, matieres)
     elif choix == 5:
         if matieres is None:
-            print "Il faut d'abord charger les notes"
+            print("Il faut d'abord charger les notes")
         else:
             gestion_etudiants.saisie_etudiant(notes, matieres)
     elif choix == 6:
         if matieres is None:
-            print "Il faut d'abord charger les notes"
+            print("Il faut d'abord charger les notes")
         else:
-            noms = notes.keys()
+            noms = list(notes.keys())
             nom, numero = outils_clavier.affiche_et_choix(noms)
             notes = suppression.supprimer_etudiant(nom, notes)
     elif choix == 7:
         if matieres is None:
-            print "Il faut d'abord charger les notes"
+            print("Il faut d'abord charger les notes")
         else:
             notes = suppression.supprimer_tous(notes)
     elif choix == 8:
         if matieres is None:
-            print "Il faut d'abord charger les notes"
+            print("Il faut d'abord charger les notes")
         else:
             sauvegardelecture.sauvegarde(matieres, coeffs, notes)
     elif choix == 9:
         if matieres is None:
-            print "Il faut d'abord charger les notes"
+            print("Il faut d'abord charger les notes")
         else:
             (matieres, coeffs, notes) = saisie_matieres.saisie_matiere(matieres, coeffs, notes)
     elif choix == 10:
         if matieres is None:
-            print "Il faut d'abord charger les notes"
+            print("Il faut d'abord charger les notes")
         else:
             matsup, numero = outils_clavier.affiche_et_choix(matieres)
             matieres, coeffs, notes = suppression.suppression_matiere(matsup, matieres, coeffs, notes)
     elif choix == 11:
         if matieres is None:
-            print "Il faut d'abord charger les notes"
+            print("Il faut d'abord charger les notes")
         else:
             coeffs = modification_coefficient.modification_coeff(matieres, coeffs)
     elif choix == 12:

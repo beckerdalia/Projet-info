@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-import Tkinter as tk
-import tkFileDialog
-import tkMessageBox
+import tkinter as tk
+import tkinter.filedialog
+import tkinter.messagebox
 # https://stackoverflow.com/questions/32019556/matplotlib-crashing-tkinter-application
 import matplotlib
 matplotlib.use("TkAgg")
@@ -44,7 +44,7 @@ class Fenetrage:
             button = tk.Button(top, width=10, text="Fini", command=top.destroy)
             button.pack(side="left", expand=True, fill=tk.BOTH)
         else:
-            noms = self.notes.keys()
+            noms = list(self.notes.keys())
             self.top = tk.Toplevel()
             self.top.title("Choisir un étudiant")
             self.variable = tk.StringVar(self.top)
@@ -56,7 +56,7 @@ class Fenetrage:
 
     def lecture(self):
         # https://pythonspot.com/tk-file-dialogs/
-        self.filename = tkFileDialog.askopenfilename(title="Choisir le fichier",defaultextension='txt')
+        self.filename = tkinter.filedialog.askopenfilename(title="Choisir le fichier",defaultextension='txt')
         self.matieres, self.coeffs, self.notes = sauvegardelecture.lecture(self.filename)
         self.affiche_promo()
         # self.text.configure(state='normal')
@@ -68,7 +68,7 @@ class Fenetrage:
         sauvegardelecture.ecrire_dans_fichier(self.matieres, self.coeffs, self.notes, self.filename)
 
     def sauvegardesous(self):
-        filename = tkFileDialog.asksaveasfilename(title="Choisir le fichier", defaultextension='txt')
+        filename = tkinter.filedialog.asksaveasfilename(title="Choisir le fichier", defaultextension='txt')
         if filename:
             sauvegardelecture.ecrire_dans_fichier(self.matieres, self.coeffs, self.notes, filename)
 
@@ -79,7 +79,7 @@ class Fenetrage:
         self.notes.pop(choix_etudiant)
         self.affiche_promo()
     def supprimer_etudiant(self):
-        noms = self.notes.keys()
+        noms = list(self.notes.keys())
         self.top = tk.Toplevel()
         self.top.title("Choisir un étudiant")
         self.variable = tk.StringVar(self.top)
@@ -136,20 +136,20 @@ class Fenetrage:
         nom = self.variablenom.get()
         message = outils_clavier.tester_nom(nom)
         if message != "":
-            tkMessageBox.showinfo("",message)
+            tkinter.messagebox.showinfo("",message)
             return None
         # convertir en notes
         try:
             notes = [float(var.get()) for var in self.vars]
         except:
-            tkMessageBox.showinfo("","Je ne peux pas lire les notes")
+            tkinter.messagebox.showinfo("","Je ne peux pas lire les notes")
             return None
         notesok = True
         for note in notes:
             if note<0 or note>20:
                 notesok = False
         if not notesok:
-            tkMessageBox.showinfo("","Je ne peux pas lire les notes")
+            tkinter.messagebox.showinfo("","Je ne peux pas lire les notes")
             return None
         self.top.destroy()
         noteseleve = []
@@ -182,14 +182,14 @@ class Fenetrage:
         try:
             notes = [float(var.get()) for var in self.vars]
         except:
-            tkMessageBox.showinfo("","Je ne peux pas lire les notes")
+            tkinter.messagebox.showinfo("","Je ne peux pas lire les notes")
             return None
         notesok = True
         for note in notes:
             if note<0 or note>20:
                 notesok = False
         if not notesok:
-            tkMessageBox.showinfo("","Je ne peux pas lire les notes")
+            tkinter.messagebox.showinfo("","Je ne peux pas lire les notes")
             return None
         self.matieres, self.coeffs, self.notes = saisie_matieres.ajout_matiere(matiere, coeff, notes, self.matieres, self.coeffs, self.notes)
         self.affiche_promo()
@@ -216,7 +216,7 @@ class Fenetrage:
         #
         frame2 = tk.Frame(self.top)
         frame2.pack(side="bottom", expand=True, fill=tk.BOTH)
-        self.vars = outils_tk.creer(frame2, self.notes.keys())
+        self.vars = outils_tk.creer(frame2, list(self.notes.keys()))
 
         button = tk.Button(self.top, width=10, text="Fini", command=self.ajoumatbuttonfini)
         button.pack(side="bottom", expand=True, fill=tk.BOTH)

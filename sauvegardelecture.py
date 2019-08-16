@@ -33,13 +33,13 @@ def sauvegarde(matieres, coeffs, notes, nom_fichier=''):
     if nom_fichier == "":
         saisieok = False
         while not saisieok:
-            nom_fichier = raw_input("Choisissez le nom du fichier dans lequel vous souhaitez effectuer la sauvegarde : ").strip()
+            nom_fichier = input("Choisissez le nom du fichier dans lequel vous souhaitez effectuer la sauvegarde : ").strip()
             if os.path.isfile(nom_fichier):
-                reponse = raw_input("Le fichier existe, etes-vous sur de vouloir le remplacer? Repondez: Oui ou Non :")
+                reponse = input("Le fichier existe, etes-vous sur de vouloir le remplacer? Repondez: Oui ou Non :")
                 if reponse == "Oui" or reponse == "oui":
                     saisieok = True
             elif nom_fichier == "":
-                print "non compris"
+                print("non compris")
             else:
                 saisieok = True
 
@@ -67,9 +67,9 @@ def lecture(nom_fichier=""):
     retour: liste des matières, liste des coefficients et dictionaire des notes
     """
     if nom_fichier == "":
-        nom_fichier = raw_input("Choisissez le nom du fichier a lire : ").strip()
+        nom_fichier = input("Choisissez le nom du fichier a lire : ").strip()
         while not os.path.isfile(nom_fichier):
-            nom_fichier=raw_input("Fichier non-existant: Réessayez : ").strip()
+            nom_fichier=input("Fichier non-existant: Réessayez : ").strip()
     notes = {}
     # dictionnaire vide
     with open(nom_fichier,'r') as file:
@@ -95,15 +95,15 @@ if __name__ == '__main__':
 
     if matieres == matieres2:
         # test si on retrouve les matières
-        print "matieres ok"
+        print("matieres ok")
     else:
         raise IOError("matieres lu != matieres écrit")
         # emettre une erreur entree-sortie (IO)
     if coeffs == coeffs2:
-        print "coeffs ok"
+        print("coeffs ok")
     else:
         raise IOError("coeffs lu != coeffs écrit")
     if notes == notes2:
-        print "notes ok"
+        print("notes ok")
     else:
         raise IOError("notes lu != notes écrit")
